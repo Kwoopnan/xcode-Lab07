@@ -1,5 +1,6 @@
 #ifndef _DYNAMIC_ARRAY_H
 #define _DYNAMIC_ARRAY_H
+#include <vector>
 
 
 class DynamicArray {
@@ -7,21 +8,20 @@ class DynamicArray {
         DynamicArray();
         DynamicArray(const DynamicArray& source);
         ~DynamicArray();
-    
-        void append(int newVal);
-        int at(int index) const;
+    /*
         int sum() const;
         bool remove(int valToDelete);
-        void print(std::ostream& s) const;
-        int cap() const { return capacity; }
+        
         bool operator== (const DynamicArray& source) const;
+    */
+        int cap() const { return static_cast<int>(arr.capacity()); }
+        int at(int index) const;
+        void append(int newVal);
         DynamicArray& operator=(const DynamicArray& source);
-    
+        void print(std::ostream& s) const;
 
     private:
-        int* arr;      // The array
-        int len;       // Number of elements actually populated
-        int capacity;  // New variable - this is the current capacity of the array
+        std::vector<int> arr;
     
         void resizeArray(); // Resizes the array
         void downsizeArray(); // Reduces the size of array as needed
