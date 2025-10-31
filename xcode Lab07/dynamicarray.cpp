@@ -3,8 +3,8 @@
 using namespace std;
 
 
-DynamicArray::DynamicArray(){
-    //arr =  {};
+DynamicArray::DynamicArray() {
+    // arr =  {};
     
 }
 
@@ -81,19 +81,19 @@ int DynamicArray::at(int index) const {
  *
  * @returns the total
  */
-/*
+
 int DynamicArray::sum() const {
    int totalOfElements;
    int i;
 
    totalOfElements = 0;
-   for(i = 0; i < len; i++) {
-      totalOfElements += arr[i];
+   for(i = 0; i < arr.size(); i++) {
+      totalOfElements += arr.at(i);
    }
 
    return totalOfElements;
 }
-*/
+
  
 /**
  Shrinks the size of the array to at least the INITIAL_CAP
@@ -125,9 +125,8 @@ void DynamicArray::downsizeArray() {
  * @returns  true if the value was successfully removed and false if the value wasn't found
  * @post     The lenght of the array will shrink by 1 and the capcity of the array may change.
  */
-/*
+
 bool DynamicArray::remove(int valToDelete) {
-   int j;
    int i;
 
 
@@ -135,19 +134,9 @@ bool DynamicArray::remove(int valToDelete) {
    // if found keep track of the index
    // write over the element in that index
    // move all the elements from the next index to the end back one
-    for(i = 0; i < len; i++) {
-        if(arr[i] == valToDelete) {
-            for(j = i; j < (len - 1); j++) {
-                arr[j] = arr[j+1];
-            }
-
-            --len;
-            
-            // if the capacity is at INITIAL_CAP no need to run
-            if(capacity != INITIAL_CAP) {
-                downsizeArray();
-            }
-
+    for(i = 0; i < arr.size(); i++) {
+        if(arr.at(i) == valToDelete) {
+            arr.erase(arr.begin() + i);
             return true;
         }
     }
@@ -155,13 +144,15 @@ bool DynamicArray::remove(int valToDelete) {
    return false;
 }
 
+
 bool DynamicArray::operator==(const DynamicArray& source) const {
-    if((this -> len) != (source.len)) {
+  
+    if((this -> arr.size()) != (source.arr.size())) {
         return false;
     }
-    else if ((this -> len) == (source.len)) {
-        for(int i = 0; i < len; i++) {
-            if(this->arr[i] != source.arr[i]) {
+    else if ((this -> arr.size()) == (source.arr.size())) {
+        for(int i = 0; i < arr.size(); i++) {
+            if(this-> arr.at(i) != source.arr.at(i)) {
                 return false;
             }
         }
@@ -169,7 +160,7 @@ bool DynamicArray::operator==(const DynamicArray& source) const {
     
     return true;
 }
-*/
+
 
 DynamicArray& DynamicArray::operator=(const DynamicArray& source) {
     this -> arr = source.arr;
@@ -177,4 +168,12 @@ DynamicArray& DynamicArray::operator=(const DynamicArray& source) {
     return *this;
 }
 
-
+ostream& operator<< (ostream& out, const DynamicArray& objToPrint) {
+    for (int i = 0; i < objToPrint.arr.size(); i++) {
+        out << objToPrint.arr.at(i) << " ";
+        if (i % 10 == 9) {
+            out << endl; // newline every 10 elements
+        }
+    }
+        return out;
+}
